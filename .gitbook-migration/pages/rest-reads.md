@@ -47,7 +47,7 @@ useQuery({
 
 ### Filters & pagination
 
-`ListEscrowsParams`: `scope`, `status`, `type`, `engagementId`, `contractIds`, `participant`, `role`, `platformId`, `subjectId`, `createdAfter`, `createdBefore`, `limit`, `cursor`, `sort`, `order`.
+`ListEscrowsParams`: `scope`, `status`, `type`, `engagementId`, `contractIds`, `participant`, `role`, `platformId`, `subjectId`, `createdAfter`, `createdBefore`, `includeSnapshot`, `limit`, `cursor`, `sort`, `order`.
 
 * Use `scope: "mine" | "all"` for segmentation (not per-escrow access grants).
 * List/events return a **keyset page**: `{ data, hasMore, nextCursor }`.

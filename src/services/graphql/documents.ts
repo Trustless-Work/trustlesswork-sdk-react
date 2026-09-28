@@ -15,6 +15,8 @@ const ESCROW_CORE_FIELDS = `
     name
     address
     contractId
+    decimals
+    resolved
   }
   lastLedgerSeq
   createdAt

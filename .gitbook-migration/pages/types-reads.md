@@ -39,6 +39,8 @@ type EscrowAsset = {
   name: string | null;
   address: string | null;
   contractId: string | null;
+  decimals: number;
+  resolved: boolean;
 };
 ```
 
@@ -48,16 +50,18 @@ type EscrowAsset = {
 type EscrowSummary = {
   network: string;
   contractId: string;
-  type: EscrowType;
-  engagementId: string;
-  status: EscrowStatus;
-  amount: string | null; // both flavors; null until first on-chain projection
+  type: EscrowType | null;    // null until first on-chain projection
+  status: EscrowStatus | null;
+  anomalies: string[];
+  amount: string | null;     // both flavors; null until first projection
   balance: string;            // deposited − released (always present)
   asset: EscrowAsset | null;
   lastLedgerSeq: string;
   createdAt: string;
   updatedAt: string;
-  snapshot: EscrowSnapshot;   // title, roles, milestones, …
+  firstLedgerClosedAt: string | null;
+  lastLedgerClosedAt: string | null;
+  snapshot: EscrowSnapshot | null;
 };
 ```
 
@@ -178,10 +182,11 @@ type EscrowMilestones = {
 
 type EscrowFinancial = {
   contractId: string;
-  type: EscrowType;
-  asset: string;
-  platformFee: string;
-  amount: string;
+  type: EscrowType | null;
+  asset: string | null;       // deprecated; prefer assetInfo
+  assetInfo: EscrowAsset | null;
+  platformFee: string | null;
+  amount: string | null;
   totalDeposited: string;
   totalReleased: string;
   pendingRelease: string;
@@ -205,6 +210,7 @@ type ListEscrowsParams = {
   subjectId?: string;
   createdAfter?: string;
   createdBefore?: string;
+  includeSnapshot?: boolean;
   limit?: number;
   cursor?: string;
   sort?: "createdAt" | "updatedAt";

@@ -220,6 +220,8 @@ export type ListEscrowsParams = {
   subjectId?: string;
   createdAfter?: string;
   createdBefore?: string;
+  /** `false` omits the snapshot (served as null). Defaults to true. */
+  includeSnapshot?: boolean;
   limit?: number;
   cursor?: string;
   sort?: "createdAt" | "updatedAt";

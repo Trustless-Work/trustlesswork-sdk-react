@@ -12,6 +12,10 @@ export type EscrowAsset = {
   name: string | null;
   address: string | null;
   contractId: string | null;
+  /** Decimals every amount in the payload was scaled with. Falls back to 7 while unresolved. */
+  decimals: number;
+  /** False while token metadata is unresolved and `decimals` is the fallback. */
+  resolved: boolean;
 };
 
 /**
@@ -20,9 +24,11 @@ export type EscrowAsset = {
 export type EscrowSummary = {
   network: EscrowNetwork;
   contractId: string;
-  type: EscrowType;
-  engagementId: string;
-  status: EscrowStatus;
+  /** Null until the first on-chain state is projected. */
+  type: EscrowType | null;
+  status: EscrowStatus | null;
+  /** Empty when the projected state satisfies Trustless Work invariants. */
+  anomalies: string[];
   /**
    * Escrow total in token units (decimal string).
    * Single-release: the escrow amount. Multi-release: the sum of milestone amounts.
@@ -36,7 +42,9 @@ export type EscrowSummary = {
   lastLedgerSeq: string;
   createdAt: string;
   updatedAt: string;
-  snapshot: EscrowSnapshot;
+  firstLedgerClosedAt: string | null;
+  lastLedgerClosedAt: string | null;
+  snapshot: EscrowSnapshot | null;
 };
 
 /**
@@ -78,12 +86,16 @@ export type EscrowNextRelease = {
  */
 export type EscrowFinancial = {
   contractId: string;
-  type: EscrowType;
-  /** Legacy plain string (`USDC:G...`); prefer `EscrowSummary.asset` on list/detail. */
-  asset: string;
-  platformFee: string;
-  /** Escrow total in token units (decimal string). */
-  amount: string;
+  /** Null until the first on-chain state is projected. */
+  type: EscrowType | null;
+  /** Raw trustline id. Deprecated on the wire; prefer `assetInfo`. */
+  asset: string | null;
+  /** Resolved trustline; null until the first state is projected. */
+  assetInfo: EscrowAsset | null;
+  /** Escrow-level fee as a percentage (decimal string). */
+  platformFee: string | null;
+  /** Escrow total in token units (decimal string). Null until the first projection. */
+  amount: string | null;
   totalDeposited: string;
   totalReleased: string;
   pendingRelease: string;

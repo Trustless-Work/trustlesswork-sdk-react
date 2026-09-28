@@ -35,6 +35,7 @@ function useListEscrows(): {
 | `role` | `Role` | |
 | `platformId` / `subjectId` | `string` | |
 | `createdAfter` / `createdBefore` | `string` | ISO timestamps |
+| `includeSnapshot` | `boolean` | `false` omits the snapshot |
 | `limit` | `number` | |
 | `cursor` | `string` | Keyset cursor |
 | `sort` | `"createdAt" \| "updatedAt"` | |

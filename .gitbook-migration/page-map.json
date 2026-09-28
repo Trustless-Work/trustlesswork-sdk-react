@@ -1,0 +1,191 @@
+{
+  "updates": [
+    {
+      "file": "introduction.md",
+      "pageId": "Axl3sJ9gmLZkGt0gHS2Q",
+      "notes": "Overwrite Introduction with v5 overview"
+    },
+    {
+      "file": "getting-started.md",
+      "pageId": "rxYPNF9iKlXPgPA9et2e",
+      "notes": "Overwrite Getting Started \u2014 TrustlessWorkConfig + install"
+    },
+    {
+      "file": "use-send-transaction.md",
+      "pageId": "FB7WlcHJgllJlGOLvLpo",
+      "notes": "Overwrite useSendTransaction for Core v2 send"
+    },
+    {
+      "file": "operate.md",
+      "pageId": "6V3WBfCu3BK1LN7OecAK",
+      "notes": "Rename Escrows \u2192 Operate overview; keep page ID"
+    },
+    {
+      "file": "use-deploy-escrow.md",
+      "pageId": "Q1JBwo6VDwvJ4LnkvZmr",
+      "notes": "Rename useInitializeEscrow \u2192 useDeployEscrow; overwrite content"
+    },
+    {
+      "file": "use-update-escrow.md",
+      "pageId": "9i6jkzJGOLLyz2XhAbgQ",
+      "notes": "Overwrite useUpdateEscrow for v2 payload"
+    },
+    {
+      "file": "use-fund-escrow.md",
+      "pageId": "2CGkLjtogajBph2QICnR",
+      "notes": "Overwrite useFundEscrow"
+    },
+    {
+      "file": "use-approve-milestones.md",
+      "pageId": "qNzOiMMzXZ0AIcP8A7UK",
+      "notes": "Rename useApproveMilestone \u2192 useApproveMilestones (batch)"
+    },
+    {
+      "file": "use-change-milestone-status.md",
+      "pageId": "fdVJptpwsYDUBZJSATt0",
+      "notes": "Overwrite useChangeMilestoneStatus (batch updates)"
+    },
+    {
+      "file": "use-release-funds.md",
+      "pageId": "40zpdUXQoRfIoVIoCsPE",
+      "notes": "Overwrite useReleaseFunds (+ releaseMilestones)"
+    },
+    {
+      "file": "use-start-dispute.md",
+      "pageId": "4MKXMbobnkoIVz8daMeF",
+      "notes": "Overwrite useStartDispute (+ disputeMilestones)"
+    },
+    {
+      "file": "use-resolve-dispute.md",
+      "pageId": "LdaSuJi7rd06CNR1cBaW",
+      "notes": "Overwrite useResolveDispute"
+    },
+    {
+      "file": "use-withdraw-remaining-funds.md",
+      "pageId": "Z3ytB4Orn1ZuQutWHqob",
+      "notes": "Overwrite useWithdrawRemainingFunds"
+    },
+    {
+      "file": "rest-reads.md",
+      "pageId": "IIFCnXI4bcyOu7PLG5jL",
+      "notes": "Rename Indexer \u2192 REST Reads overview; keep page ID /escrow-react-sdk/indexer"
+    }
+  ],
+  "inserts": [
+    {
+      "file": "architecture.md",
+      "title": "Architecture",
+      "into": "scGDuM8o0MSb8BP9e8vW",
+      "at": 2,
+      "notes": "Insert into root group at index 2 (after Introduction + Getting Started)"
+    },
+    {
+      "file": "use-approve-and-release-milestones.md",
+      "title": "useApproveAndReleaseMilestones",
+      "into": "6V3WBfCu3BK1LN7OecAK",
+      "notes": "New operate hook under Operate parent"
+    },
+    {
+      "file": "use-manage-milestones.md",
+      "title": "useManageMilestones",
+      "into": "6V3WBfCu3BK1LN7OecAK",
+      "notes": "New operate hook under Operate parent"
+    },
+    {
+      "file": "use-list-escrows.md",
+      "title": "useListEscrows",
+      "into": "IIFCnXI4bcyOu7PLG5jL",
+      "notes": "Insert under REST Reads after deleting indexer children"
+    },
+    {
+      "file": "use-get-escrow.md",
+      "title": "useGetEscrow",
+      "into": "IIFCnXI4bcyOu7PLG5jL",
+      "notes": "Insert under REST Reads"
+    },
+    {
+      "file": "use-get-escrow-details.md",
+      "title": "useGetEscrowDetails",
+      "into": "IIFCnXI4bcyOu7PLG5jL",
+      "notes": "Insert under REST Reads"
+    },
+    {
+      "file": "use-list-escrow-events.md",
+      "title": "useListEscrowEvents",
+      "into": "IIFCnXI4bcyOu7PLG5jL",
+      "notes": "Insert under REST Reads"
+    },
+    {
+      "file": "use-get-escrow-milestones.md",
+      "title": "useGetEscrowMilestones",
+      "into": "IIFCnXI4bcyOu7PLG5jL",
+      "notes": "Insert under REST Reads"
+    },
+    {
+      "file": "use-get-escrows-milestones.md",
+      "title": "useGetEscrowsMilestones",
+      "into": "IIFCnXI4bcyOu7PLG5jL",
+      "notes": "Insert under REST Reads"
+    },
+    {
+      "file": "use-get-escrows-financial.md",
+      "title": "useGetEscrowsFinancial",
+      "into": "IIFCnXI4bcyOu7PLG5jL",
+      "notes": "Insert under REST Reads"
+    },
+    {
+      "file": "graphql.md",
+      "title": "GraphQL",
+      "into": "scGDuM8o0MSb8BP9e8vW",
+      "notes": "New GraphQL group/overview in root group; children attached after create"
+    },
+    {
+      "file": "use-graphql-get-escrow.md",
+      "title": "useGraphqlGetEscrow",
+      "into": "graphql",
+      "notes": "Child of GraphQL group (use created graphql.md pageId after insert)"
+    },
+    {
+      "file": "use-graphql-list-escrows.md",
+      "title": "useGraphqlListEscrows",
+      "into": "graphql",
+      "notes": "Child of GraphQL group (use created graphql.md pageId after insert)"
+    },
+    {
+      "file": "types.md",
+      "title": "Types",
+      "into": "scGDuM8o0MSb8BP9e8vW",
+      "notes": "Insert Types into root group"
+    },
+    {
+      "file": "errors.md",
+      "title": "Errors",
+      "into": "scGDuM8o0MSb8BP9e8vW",
+      "notes": "Insert Errors into root group"
+    },
+    {
+      "file": "migration.md",
+      "title": "Migration",
+      "into": "scGDuM8o0MSb8BP9e8vW",
+      "notes": "Insert Migration into root group"
+    }
+  ],
+  "deletes": [
+    {
+      "pageId": "x6VydDGVEdtAPmukblP3",
+      "title": "useGetMultipleEscrowBalances"
+    },
+    {
+      "pageId": "Htj9ZjA7L97cVPohOzi0",
+      "title": "useGetEscrowFromIndexerByContractIds"
+    },
+    {
+      "pageId": "JacOtZKisHHs9Ce9brbP",
+      "title": "useGetEscrowsFromIndexerBySigner"
+    },
+    {
+      "pageId": "Ai0qcQnsr7KwjNoebznw",
+      "title": "useGetEscrowsFromIndexerByRole"
+    }
+  ]
+}

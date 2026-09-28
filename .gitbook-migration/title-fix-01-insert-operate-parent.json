@@ -1,0 +1,19 @@
+{
+  "path": {
+    "spaceId": "T9oAW5k4YIU200ZnbO0x",
+    "changeRequestId": "PLACEHOLDER"
+  },
+  "body": {
+    "changes": [
+      {
+        "operation": "insert_page",
+        "title": "Operate",
+        "into": "scGDuM8o0MSb8BP9e8vW",
+        "at": 4,
+        "document": {
+          "markdown": "---\ndescription: REST operate hooks — build unsigned XDR, sign with your wallet, then send.\n---\n\n# Operate\n\nOperate hooks call Core **build** endpoints. Each returns an **unsigned** XDR. You sign it, then submit with [`useSendTransaction`](/escrow-react-sdk/usesendtransaction).\n\nImport from `@trustless-work/escrow`, `@trustless-work/escrow/hooks`, or `@trustless-work/escrow/hooks/rest`.\n\n### Hooks\n\n| Hook | Action |\n| --- | --- |\n| [`useDeployEscrow`](/escrow-react-sdk/escrows/usedeployescrow) | Create escrow (`unsignedXdr` + predicted `contractId`) |\n| [`useFundEscrow`](/escrow-react-sdk/escrows/usefundescrow) | Fund |\n| [`useUpdateEscrow`](/escrow-react-sdk/escrows/useupdateescrow) | Update properties |\n| [`useChangeMilestoneStatus`](/escrow-react-sdk/escrows/usechangemilestonestatus) | Status / evidence (batch) |\n| [`useApproveMilestones`](/escrow-react-sdk/escrows/useapprovemilestones) | Approve (batch) |\n| [`useApproveAndReleaseMilestones`](/escrow-react-sdk/escrows/useapproveandreleasemilestones) | Approve + release (multi-release) |\n| [`useManageMilestones`](/escrow-react-sdk/escrows/usemanagemilestones) | Add / edit milestones |\n| [`useReleaseFunds`](/escrow-react-sdk/escrows/usereleasefunds) | Release |\n| [`useStartDispute`](/escrow-react-sdk/escrows/usestartdispute) | Start dispute |\n| [`useResolveDispute`](/escrow-react-sdk/escrows/useresolvedispute) | Resolve dispute (distributions) |\n| [`useWithdrawRemainingFunds`](/escrow-react-sdk/escrows/usewithdrawremainingfunds) | Withdraw remaining |\n\n{% hint style=\"info\" %}\nMost operate methods take `(payload, type)` where `type` is `\"single-release\"` | `\"multi-release\"`. Multi-only helpers (`approveAndReleaseMilestones`, `releaseMilestones`, `disputeMilestones`) omit the type argument.\n{% endhint %}\n\n### Pattern\n\n```tsx\nconst { unsignedXdr } = await someOperateHook(payload, \"single-release\");\nconst signedXdr = await signWithWallet(unsignedXdr);\nconst result = await sendTransaction(signedXdr);\n```\n\n### Response types\n\n| Step | Type |\n| --- | --- |\n| Deploy build | `DeployEscrowResponse` → `{ unsignedXdr, txHash, contractId }` |\n| Other builds | `BuildTransactionResponse` → `{ unsignedXdr, txHash }` |\n| Submit | `SendTransactionResponse` |\n\nError handling: [Errors](/escrow-react-sdk/errors). Payload types: [Types](/escrow-react-sdk/types).\n"
+        }
+      }
+    ]
+  }
+}

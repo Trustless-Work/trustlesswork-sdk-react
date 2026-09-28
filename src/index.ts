@@ -39,8 +39,8 @@ export type {
  * Core API base URL (current hosted environment).
  * Pass an explicit `baseURL` string when you need a different host.
  */
-export const mainNet = "https://trustless-core-production.up.railway.app";
-export const development = "https://trustless-core-production.up.railway.app";
+export const mainNet = "https://beta.api.trustlesswork.com";
+export const development = "https://beta.api.trustlesswork.com";
 
 export * from "./hooks";
 export * from "./types";

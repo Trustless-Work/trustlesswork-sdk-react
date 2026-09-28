@@ -22,7 +22,7 @@ function useGraphqlListEscrows(): {
 };
 ```
 
-`GraphqlListEscrowsVariables` mirrors REST list filters: `scope`, `status`, `contractType`, `engagementId`, `contractIds`, `participant`, `role`, `platformId`, `subjectId`, `createdAfter`, `createdBefore`, `limit`, `cursor`, `sort`, `order`.
+`GraphqlListEscrowsVariables` mirrors REST list filters: `scope`, `status`, `type`, `engagementId`, `contractIds`, `participant`, `role`, `platformId`, `subjectId`, `createdAfter`, `createdBefore`, `limit`, `cursor`, `sort`, `order`.
 
 ### Example
 

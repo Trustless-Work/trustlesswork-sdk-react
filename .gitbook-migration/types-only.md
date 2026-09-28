@@ -567,7 +567,7 @@ type EscrowSummary = {
   type: EscrowType;
   engagementId: string;
   status: EscrowStatus;
-  totalAmount: string | null; // multi: sum of milestones; null for single
+  amount: string | null; // both flavors; null until first on-chain projection
   balance: string;            // deposited − released (always present)
   asset: EscrowAsset | null;
   lastLedgerSeq: string;
@@ -697,11 +697,11 @@ type EscrowFinancial = {
   type: EscrowType;
   asset: string;
   platformFee: string;
-  totalAmount: string;
+  amount: string;
   totalDeposited: string;
   totalReleased: string;
   pendingRelease: string;
-  nextRelease: { milestoneIndex: number; amount: string } | null;
+  nextRelease: { milestoneIndex: number | null; amount: string } | null;
   balance: string;
 };
 ```
@@ -712,7 +712,7 @@ type EscrowFinancial = {
 type ListEscrowsParams = {
   scope?: "mine" | "all";
   status?: EscrowStatus;
-  contractType?: EscrowType; // filter name; response field is `type`
+  type?: EscrowType; // same values as the response `type` field
   engagementId?: string;
   contractIds?: string[];
   participant?: string;

@@ -213,7 +213,7 @@ useQuery({
 
 ### `ListEscrowsParams` (filters)
 
-`scope`, `status`, `contractType`, `engagementId`, `contractIds`, `participant`, `role`, `platformId`, `subjectId`, `createdAfter`, `createdBefore`, `limit`, `cursor`, `sort`, `order`.
+`scope`, `status`, `type`, `engagementId`, `contractIds`, `participant`, `role`, `platformId`, `subjectId`, `createdAfter`, `createdBefore`, `limit`, `cursor`, `sort`, `order`.
 
 - Use `scope: "mine" | "all"` for segmentation (not per-escrow access grants).
 - List/events return a **keyset page**: `{ data, hasMore, nextCursor }`.
@@ -325,7 +325,7 @@ Breaking changes aligned with the Core v2 wire contract:
 ### Read-model notes
 
 1. **`EscrowSummary`** includes root `balance` (string) and `asset { name, address, contractId }`.
-2. Read amounts (`balance`, `totalAmount`, financial fields, snapshot amounts) are **decimal strings**.
+2. Read amounts (`balance`, `amount`, financial fields, snapshot amounts) are **decimal strings**. `amount` is the escrow total for both flavors (`null` until the first on-chain projection).
 3. **`createdByUserId` / `creatorAddress`** are not on reads (on-chain state is public).
 4. Listing uses `scope=mine|all` — not per-escrow access grants.
 5. After submit, handle `STELLAR_TX_SUBMITTED_INDEXER_LAGGING` and poll reads; `balance` is eventually consistent.

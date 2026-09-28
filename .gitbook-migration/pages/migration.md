@@ -57,7 +57,7 @@ Use `useApproveMilestones`, `useChangeMilestoneStatus`, `useManageMilestones`, `
 ### Read-model notes
 
 1. **`EscrowSummary`** includes root `balance` (string) and `asset { name, address, contractId }`.
-2. Read amounts (`balance`, `totalAmount`, financial fields, snapshot amounts) are **decimal strings** — do **not** divide by `1e7`.
+2. Read amounts (`balance`, `amount`, financial fields, snapshot amounts) are **decimal strings** — do **not** divide by `1e7`. `amount` is the escrow total for both flavors (`null` until the first on-chain projection).
 3. **`createdByUserId` / `creatorAddress`** are not on reads (on-chain state is public).
 4. Listing uses `scope=mine|all` — not per-escrow access grants.
 5. After submit, handle `STELLAR_TX_SUBMITTED_INDEXER_LAGGING` and poll reads; `balance` is eventually consistent.

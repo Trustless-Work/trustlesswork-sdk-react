@@ -23,8 +23,12 @@ export type EscrowSummary = {
   type: EscrowType;
   engagementId: string;
   status: EscrowStatus;
-  /** Multi-release only (sum of milestones). Null for single-release. */
-  totalAmount: string | null;
+  /**
+   * Escrow total in token units (decimal string).
+   * Single-release: the escrow amount. Multi-release: the sum of milestone amounts.
+   * Null until the first on-chain state is projected.
+   */
+  amount: string | null;
   /** Projected balance (deposited − released) in human token units. Always present. */
   balance: string;
   /** Resolved trustline token; null until first projection. */
@@ -64,7 +68,7 @@ export type EscrowDeposit = {
  * Next release hint on financial batch rows.
  */
 export type EscrowNextRelease = {
-  milestoneIndex: number;
+  milestoneIndex: number | null;
   amount: string;
 };
 
@@ -78,7 +82,8 @@ export type EscrowFinancial = {
   /** Legacy plain string (`USDC:G...`); prefer `EscrowSummary.asset` on list/detail. */
   asset: string;
   platformFee: string;
-  totalAmount: string;
+  /** Escrow total in token units (decimal string). */
+  amount: string;
   totalDeposited: string;
   totalReleased: string;
   pendingRelease: string;

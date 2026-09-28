@@ -46,7 +46,7 @@ useQuery({
 GraphQL wire types (`GraphqlEscrow`, `GraphqlEscrowPage`, `GraphqlEscrowFinancial`, …) live on `@trustless-work/escrow` / `@trustless-work/escrow/graphql`.
 
 {% hint style="info" %}
-REST and GraphQL share the same Core identity model (`contractId`) and filter semantics (`scope`, `status`, `contractType`, …). Choose based on nesting needs, not different product surfaces.
+REST and GraphQL share the same Core identity model (`contractId`) and filter semantics (`scope`, `status`, `type`, …). Choose based on nesting needs, not different product surfaces.
 {% endhint %}
 
 See also [REST Reads](/escrow-react-sdk/indexer) and [Types](/escrow-react-sdk/types).

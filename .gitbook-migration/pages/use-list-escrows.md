@@ -28,7 +28,7 @@ function useListEscrows(): {
 | --- | --- | --- |
 | `scope` | `"mine" \| "all"` | Segmentation (not access grants) |
 | `status` | `EscrowStatus` | `active` \| `released` \| `disputed` |
-| `contractType` | `EscrowType` | Filter name; response field is `type` |
+| `type` | `EscrowType` | `single-release` \| `multi-release` (same as the response field) |
 | `engagementId` | `string` | |
 | `contractIds` | `string[]` | |
 | `participant` | `string` | Address |

@@ -230,6 +230,29 @@ useQuery({
 
 There is **no** UUID `id` / `escrowId`. Amounts on reads are **human decimal strings** (e.g. `"250.5"`) — do **not** divide by `1e7`. Build/operate payloads still use human **numbers**.
 
+## CCTP cross-chain payout
+
+The receiver can get their share in USDC on another chain (Circle CCTP + Forwarding Service). Only escrows deployed from a CCTP-enabled factory support it; others return `409 CCTP_NOT_SUPPORTED_BY_ESCROW`. Multi-release works per milestone (`milestoneIndex`).
+
+| Hook                            | Endpoint                                                  |
+| ------------------------------- | --------------------------------------------------------- |
+| `useSetCrossChainDestination`   | `POST /escrow/:type/v2/cross-chain-destination` (receiver signs) |
+| `useClearCrossChainDestination` | `POST /escrow/:type/v2/cross-chain-destination/clear` (receiver signs) |
+| `useGetCrossChainDestination`   | `GET /escrow/:type/v2/cross-chain-destination/:contractId[/:milestoneIndex]` (`null` = Stellar payout) |
+| `useGetCctpFeeQuote`            | `GET /cctp/fee-quote/:destinationDomain`                  |
+| `useGetCctpAttestation`         | `GET /cctp/attestation/:burnTxHash`                       |
+
+```tsx
+const { setCrossChainDestination } = useSetCrossChainDestination();
+
+const { unsignedXdr, estimatedFeeUsdc } = await setCrossChainDestination(
+  { contractId, receiver, destinationDomain: 6, recipientAddress: "0x..." },
+  "single-release"
+);
+```
+
+Domains: `0` Ethereum, `1` Avalanche, `2` OP, `3` Arbitrum, `5` Solana, `6` Base, `7` Polygon.
+
 ## Reads — GraphQL
 
 | Hook                    | Query                                                |

@@ -70,6 +70,20 @@ Deploy: `{ platformId, subjectId }` → `X-TW-Platform` / `X-TW-Subject`.
 
 ---
 
+## REST — CCTP (pago cross-chain del receiver)
+
+| Hook | Acción |
+|------|--------|
+| `useSetCrossChainDestination` | Registrar destino (firma el receiver; devuelve `estimatedFeeUsdc`) |
+| `useClearCrossChainDestination` | Borrar destino (firma el receiver) |
+| `useGetCrossChainDestination` | Leer destino (`null` = pago en Stellar) |
+| `useGetCctpFeeQuote` | Costo estimado del forwarding |
+| `useGetCctpAttestation` | Estado de la quema CCTP |
+
+Multi-release: por milestone (`milestoneIndex`).
+
+---
+
 ## GraphQL — Leer escrows (`POST /graphql`)
 
 | Hook | Query |

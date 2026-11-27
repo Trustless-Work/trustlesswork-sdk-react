@@ -17,3 +17,8 @@ export { useListEscrowEvents } from "./useListEscrowEvents";
 export { useGetEscrowMilestones } from "./useGetEscrowMilestones";
 export { useGetEscrowsMilestones } from "./useGetEscrowsMilestones";
 export { useGetEscrowsFinancial } from "./useGetEscrowsFinancial";
+export { useSetCrossChainDestination } from "./useSetCrossChainDestination";
+export { useClearCrossChainDestination } from "./useClearCrossChainDestination";
+export { useGetCrossChainDestination } from "./useGetCrossChainDestination";
+export { useGetCctpFeeQuote } from "./useGetCctpFeeQuote";
+export { useGetCctpAttestation } from "./useGetCctpAttestation";

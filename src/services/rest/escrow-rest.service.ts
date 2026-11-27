@@ -5,6 +5,7 @@ import {
   ApproveAndReleaseMilestonesPayload,
   ApproveMilestonesPayload,
   BatchContractIdsParams,
+  CctpDestinationDomain,
   ChangeMilestoneStatusPayload,
   DeployMultiReleaseEscrowPayload,
   DeploySingleReleaseEscrowPayload,
@@ -13,12 +14,18 @@ import {
   ListEscrowsParams,
   ManageMultiReleaseMilestonesPayload,
   ManageSingleReleaseMilestonesPayload,
+  MultiReleaseClearCrossChainDestinationPayload,
+  MultiReleaseGetCrossChainDestinationParams,
   MultiReleaseReleaseFundsPayload,
   MultiReleaseResolveDisputePayload,
+  MultiReleaseSetCrossChainDestinationPayload,
   MultiReleaseStartDisputePayload,
   MultiReleaseWithdrawRemainingFundsPayload,
+  SingleReleaseClearCrossChainDestinationPayload,
+  SingleReleaseGetCrossChainDestinationParams,
   SingleReleaseReleaseFundsPayload,
   SingleReleaseResolveDisputePayload,
+  SingleReleaseSetCrossChainDestinationPayload,
   SingleReleaseStartDisputePayload,
   SingleReleaseWithdrawRemainingFundsPayload,
   UpdateMultiReleaseEscrowPayload,
@@ -29,12 +36,16 @@ import {
   BatchEscrowFinancialResponse,
   BatchEscrowMilestonesResponse,
   BuildTransactionResponse,
+  CctpAttestationResponse,
+  CctpFeeQuoteResponse,
   DeployEscrowResponse,
+  GetCrossChainDestinationResponse,
   GetEscrowMilestonesResponse,
   GetEscrowResponse,
   ListEscrowEventsResponse,
   ListEscrowsResponse,
   SendTransactionResponse,
+  SetCrossChainDestinationResponse,
 } from "../../types/types.response";
 import type { HttpTransport } from "../../transport/http-transport";
 
@@ -222,6 +233,70 @@ export class EscrowRestService {
 
   disputeMilestones(data: MultiReleaseStartDisputePayload) {
     return this.startDispute(data, "multi-release");
+  }
+
+  /** Receiver registers where their payout goes via CCTP (multi-release: per milestone). */
+  setCrossChainDestination(
+    data:
+      | SingleReleaseSetCrossChainDestinationPayload
+      | MultiReleaseSetCrossChainDestinationPayload,
+    type: EscrowType,
+  ) {
+    return this.http.axios
+      .post<SetCrossChainDestinationResponse>(
+        `${this.v2Base(type)}/cross-chain-destination`,
+        data,
+      )
+      .then((r) => r.data);
+  }
+
+  /** Receiver removes the destination; the payout goes back to Stellar. */
+  clearCrossChainDestination(
+    data:
+      | SingleReleaseClearCrossChainDestinationPayload
+      | MultiReleaseClearCrossChainDestinationPayload,
+    type: EscrowType,
+  ) {
+    return this.http.axios
+      .post<BuildTransactionResponse>(
+        `${this.v2Base(type)}/cross-chain-destination/clear`,
+        data,
+      )
+      .then((r) => r.data);
+  }
+
+  /** Resolves to `null` when no destination is set (Stellar payout). */
+  async getCrossChainDestination(
+    params:
+      | SingleReleaseGetCrossChainDestinationParams
+      | MultiReleaseGetCrossChainDestinationParams,
+    type: EscrowType,
+  ) {
+    let url = `${this.v2Base(type)}/cross-chain-destination/${encodeURIComponent(params.contractId)}`;
+    if (type === "multi-release") {
+      if (!("milestoneIndex" in params)) {
+        throw new TypeError("milestoneIndex is required for multi-release");
+      }
+      url += `/${params.milestoneIndex}`;
+    }
+    return this.http.axios
+      .get<GetCrossChainDestinationResponse>(url)
+      .then((r) => r.data);
+  }
+
+  getCctpFeeQuote(destinationDomain: CctpDestinationDomain) {
+    return this.http.axios
+      .get<CctpFeeQuoteResponse>(`/cctp/fee-quote/${destinationDomain}`)
+      .then((r) => r.data);
+  }
+
+  /** Status of a CCTP burn, by the Stellar tx hash of the release. */
+  getCctpAttestation(burnTxHash: string) {
+    return this.http.axios
+      .get<CctpAttestationResponse>(
+        `/cctp/attestation/${encodeURIComponent(burnTxHash)}`,
+      )
+      .then((r) => r.data);
   }
 
   listEscrows(params: ListEscrowsParams = {}) {
